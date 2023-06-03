@@ -15,4 +15,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "Dota2"
 include(":app")
- 
+include(":utils")
+include(":screens:main:api")
+include(":screens:main:impl")
+include(":entities")
+include(":domain:api")
+include(":domain:impl")
+include(":domain:feature")
+include(":screens:main:feature")
