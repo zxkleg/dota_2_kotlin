@@ -22,7 +22,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +33,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import com.example.impl.R
 
 class MainActivity : ComponentActivity() {
@@ -48,9 +46,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(screenWidth: Dp, screenHeight: Dp) {
-    Column (
+    Column(
         modifier = Modifier
-    ){
+    ) {
         AppBar(screenWidth)
         Column(
             modifier = Modifier
@@ -66,8 +64,9 @@ fun MainScreen(screenWidth: Dp, screenHeight: Dp) {
         }
     }
 }
+
 @Composable
-fun AppBar(screenWidth: Dp){
+fun AppBar(screenWidth: Dp) {
     Box(
         modifier = Modifier
             .size(screenWidth, 72.dp)
@@ -90,7 +89,7 @@ fun AppBar(screenWidth: Dp){
                     .clickable(onClick = {})
             ) {
                 Image(
-                    painter = painterResource(R.drawable.icon),
+                    painter = painterResource(R.drawable.dota2_logo_icon),
                     contentDescription = "Menu Button",
                     modifier = Modifier
                         .padding(19.dp, 22.dp)
@@ -108,7 +107,7 @@ fun AppBar(screenWidth: Dp){
 }
 
 @Composable
-fun Player(){
+fun Player() {
     Row(
         verticalAlignment = CenterVertically,
         modifier = Modifier
@@ -161,6 +160,6 @@ fun MyUI() {
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun PreviewMyUI(){
+fun PreviewMyUI() {
     MyUI()
 }
