@@ -89,7 +89,7 @@ fun AppBar(screenWidth: Dp) {
                     .clickable(onClick = {})
             ) {
                 Image(
-                    painter = painterResource(R.drawable.dota2_logo_icon),
+                    painter = painterResource(R.drawable.icon),
                     contentDescription = "Menu Button",
                     modifier = Modifier
                         .padding(19.dp, 22.dp)
