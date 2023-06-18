@@ -56,7 +56,7 @@ fun MainScreen(screenWidth: Dp, screenHeight: Dp) {
                 .background(Color.White)
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(all = 8.dp)
+                .padding(all = 10.dp)
         ) {
             repeat(20) {
                 Player()
