@@ -1,5 +1,6 @@
 package com.example.screens.main.impl
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -53,6 +55,7 @@ fun MainScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     val lazyColumnState = rememberLazyListState()
+    val placeHolderDrawableRes: Int = R.drawable.dota2_logo_icon
     Scaffold(modifier = modifier, scaffoldState = scaffoldState, topBar = {
         AppBar()
     }) { paddingValues ->
@@ -70,7 +73,8 @@ fun MainScreen(
             ) {
                 items(listOfPlayers.size, key = { index -> listOfPlayers[index].id }) { index ->
                     SmallPlayerCard(
-                        dataPlayer = listOfPlayers[index]
+                        dataPlayer = listOfPlayers[index],
+                        placeHolderDrawableRes = placeHolderDrawableRes
                     )
                     if (index != listOfPlayers.lastIndex) Spacer(
                         modifier = Modifier
@@ -126,7 +130,8 @@ fun AppBar() {
 
 @Composable
 fun SmallPlayerCard(
-    dataPlayer: DataPlayer, placeHolderDrawableRes: Int = R.drawable.dota2_logo_icon
+    dataPlayer: DataPlayer,
+    placeHolderDrawableRes: Int
 ) {
     Button(
         onClick = {},
@@ -149,21 +154,15 @@ fun SmallPlayerCard(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = CenterVertically
         ) {
-            dataPlayer.avatar?.asImageBitmap()?.let { imageBitmap ->
-                Image(
-                    modifier = Modifier
-                        .padding(0.dp, 4.dp)
-                        .size(40.dp),
-                    bitmap = imageBitmap,
-                    contentDescription = ""
-                )
-            } ?: Image(
+            Avatar(
                 modifier = Modifier
                     .padding(0.dp, 4.dp)
                     .size(40.dp),
-                painter = painterResource(id = placeHolderDrawableRes),
-                contentDescription = ""
+                avatarImage = dataPlayer.avatar,
+                contentDescription = "",
+                placeHolderDrawableRes = placeHolderDrawableRes
             )
+            Spacer(modifier = Modifier.width(16.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -172,52 +171,74 @@ fun SmallPlayerCard(
                 horizontalAlignment = Alignment.Start,
             ) {
                 Text(
-                    text = dataPlayer.nickname, modifier = Modifier.padding(2.dp)
+                    text = dataPlayer.nickname, fontSize = 20.sp, modifier = Modifier.padding(2.dp)
                 )
             }
         }
     }
 }
 
+@Composable
+fun Avatar(
+    modifier: Modifier,
+    avatarImage: Bitmap?,
+    contentDescription: String,
+    placeHolderDrawableRes: Int
+) {
+    avatarImage?.asImageBitmap()?.let { imageBitmap ->
+        Image(
+            modifier = modifier,
+            bitmap = imageBitmap,
+            contentDescription = contentDescription
+        )
+    } ?: Image(
+        modifier = modifier,
+        painter = painterResource(placeHolderDrawableRes),
+        contentDescription = contentDescription
+    )
+}
+
 val listOfPlayers = listOf(
     DataPlayer(
-        id = "13372281", nickname = "Kirill", avatar = null
+        id = "13372281", nickname = "Kirill", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "13372282", nickname = "Nikita", avatar = null
+        id = "13372282", nickname = "Nikita", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "13372283", nickname = "Dmitry", avatar = null
+        id = "13372283", nickname = "Dmitry", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "13372284", nickname = "Egor", avatar = null
+        id = "13372284", nickname = "Egor", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "13372285", nickname = "Andrey", avatar = null
+        id = "13372285", nickname = "Andrey", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "13372286", nickname = "Ivan", avatar = null
+        id = "13372286", nickname = "Ivan", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "13372287", nickname = "Matvey", avatar = null
+        id = "13372287", nickname = "Matvey", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "13372288", nickname = "Ilya", avatar = null
+        id = "13372288", nickname = "Ilya", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "13372289", nickname = "Sergey", avatar = null
+        id = "13372289", nickname = "Sergey", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722810", nickname = "Yaroslav", avatar = null
+        id = "133722810", nickname = "Yaroslav", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "133722811", nickname = "Vladislav", avatar = null
+        id = "133722811", nickname = "Vladislav", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722812", nickname = "Denis", avatar = null
+        id = "133722812", nickname = "Denis", avatar = null, hasDotaPlus = true
     ), DataPlayer(
-        id = "133722813", nickname = "Evgeny", avatar = null
+        id = "133722813", nickname = "Evgeny", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722814", nickname = "Bogdan", avatar = null
+        id = "133722814", nickname = "Bogdan", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722815", nickname = "Zakhar", avatar = null
+        id = "133722815", nickname = "Zakhar", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722816", nickname = "Nikolai", avatar = null
+        id = "133722816", nickname = "Nikolai", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722817", nickname = "Pavel", avatar = null
+        id = "133722817", nickname = "Pavel", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722818", nickname = "Gleb", avatar = null
+        id = "133722818", nickname = "Gleb", avatar = null, hasDotaPlus = false
     ), DataPlayer(
-        id = "133722819", nickname = "Arseny", avatar = null
+        id = "133722819", nickname = "Arseny", avatar = null, hasDotaPlus = false
+    ), DataPlayer(
+        id = "133722820", nickname = "Vladimir", avatar = null, hasDotaPlus = true
     )
 )
 
