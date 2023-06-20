@@ -42,18 +42,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":screens:main:api"))
+    implementation(project(":utils"))
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
-    
+
     // Compose
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.foundation:foundation:1.4.3")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
 
     //   -Material
     implementation("androidx.compose.material:material:1.4.3")

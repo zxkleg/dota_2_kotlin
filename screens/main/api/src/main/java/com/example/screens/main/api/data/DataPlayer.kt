@@ -1,4 +1,4 @@
-package com.example.screens.main.impl
+package com.example.screens.main.api.data
 
 import android.graphics.Bitmap
 
