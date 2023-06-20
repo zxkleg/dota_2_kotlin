@@ -156,9 +156,9 @@ fun SmallPlayerCard(
         ) {
             Avatar(
                 modifier = Modifier
-                    .padding(0.dp, 4.dp)
                     .size(40.dp),
                 avatarImage = dataPlayer.avatar,
+                hasDotaPlus = dataPlayer.hasDotaPlus,
                 contentDescription = "",
                 placeHolderDrawableRes = placeHolderDrawableRes
             )
@@ -182,20 +182,40 @@ fun SmallPlayerCard(
 fun Avatar(
     modifier: Modifier,
     avatarImage: Bitmap?,
+    hasDotaPlus: Boolean,
     contentDescription: String,
     placeHolderDrawableRes: Int
 ) {
-    avatarImage?.asImageBitmap()?.let { imageBitmap ->
-        Image(
-            modifier = modifier,
-            bitmap = imageBitmap,
-            contentDescription = contentDescription
-        )
-    } ?: Image(
-        modifier = modifier,
-        painter = painterResource(placeHolderDrawableRes),
-        contentDescription = contentDescription
-    )
+    Box(modifier = Modifier.padding(0.dp, 4.dp)) {
+        Box(modifier = Modifier) {
+            avatarImage?.asImageBitmap()?.let { imageBitmap ->
+                Image(
+                    modifier = modifier,
+                    bitmap = imageBitmap,
+                    contentDescription = contentDescription
+                )
+            } ?: Image(
+                modifier = modifier,
+                painter = painterResource(placeHolderDrawableRes),
+                contentDescription = contentDescription
+            )
+        }
+        if (hasDotaPlus)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .clip(CircleShape)
+                    .fillMaxSize(0.05f)
+                    .background(color = Color(0xFF001E2C))
+            ) {
+                Image(
+                    modifier = Modifier
+                        .padding(2.dp),
+                    painter = painterResource(R.drawable.dota_plus_icon),
+                    contentDescription = contentDescription
+                )
+            }
+    }
 }
 
 val listOfPlayers = listOf(
