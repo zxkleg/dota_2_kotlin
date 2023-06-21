@@ -23,9 +23,14 @@ fun MainScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     val lazyColumnState = rememberLazyListState()
-    Scaffold(modifier = modifier, scaffoldState = scaffoldState, topBar = {
-        AppBar()
-    }) { paddingValues ->
+    Scaffold(modifier = modifier, scaffoldState = scaffoldState,
+        topBar = {
+            AppBar()
+        }
+        //floatingActionButton = {
+        //    FloatingActionButton()
+        //}
+    ) { paddingValues ->
         Surface(
             modifier = Modifier.consumeWindowInsets(paddingValues)
         ) {
