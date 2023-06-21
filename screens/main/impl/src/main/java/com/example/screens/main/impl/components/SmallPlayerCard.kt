@@ -61,7 +61,7 @@ fun SmallPlayerCard(
                 contentDescription = "",
                 placeHolderDrawableRes = placeHolderDrawableRes
             )
-            Spacer(modifier = Modifier.width(15.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
