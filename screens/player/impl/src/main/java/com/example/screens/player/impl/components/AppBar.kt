@@ -31,7 +31,6 @@ fun AppBar() {
             .fillMaxWidth()
             .wrapContentHeight()
             .background(Color(0xFF00668A))
-            .clickable(onClick = {})
     ) {
         Box(
             modifier = Modifier
