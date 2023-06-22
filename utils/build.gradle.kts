@@ -43,16 +43,16 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
 
     // Compose
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.foundation:foundation:1.4.3")
-    implementation("androidx.compose.foundation:foundation-layout:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
+    api("androidx.compose.ui:ui:1.4.3")
+    api("androidx.compose.foundation:foundation:1.4.3")
+    api("androidx.compose.foundation:foundation-layout:1.4.3")
+    api("androidx.compose.ui:ui-tooling:1.4.3")
+    api("androidx.compose.ui:ui-tooling-preview:1.4.3")
 
     //   -Material
-    implementation("androidx.compose.material:material:1.4.3")
-    implementation("androidx.compose.material3:material3:1.1.0")
-    implementation(project(mapOf("path" to ":screens:player:api")))
+    api("androidx.compose.material:material:1.4.3")
+    api("androidx.compose.material3:material3:1.1.0")
+    api(project(mapOf("path" to ":screens:player:api")))
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
