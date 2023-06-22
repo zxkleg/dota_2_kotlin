@@ -28,7 +28,7 @@ fun Avatar(
     placeHolderDrawableRes: Int
 ) {
     Box(modifier = modifier) {
-        Box(modifier = Modifier) {
+        Box(modifier = Modifier.align(Center)) {
             avatarImage?.asImageBitmap()?.let { imageBitmap ->
                 Image(
                     modifier = Modifier,
@@ -41,34 +41,35 @@ fun Avatar(
                 contentDescription = contentDescription
             )
         }
-        if (hasDotaPlus) Box(
-            modifier = Modifier
-                .align(BottomEnd)
-                .clip(CircleShape)
-                .matchParentSize()
-                .fillMaxSize(0.3f)
-                .background(color = Color(0xFF001E2C))
-        ) {
-            Image(
+        if (hasDotaPlus)
+            Box(
                 modifier = Modifier
-                    .align(Center)
+                    .align(BottomEnd)
+                    .clip(CircleShape)
                     .matchParentSize()
-                    .fillMaxSize(0.8f),
-                painter = painterResource(R.drawable.dota_plus_icon),
-                contentDescription = contentDescription
-            )
-        }
+                    .fillMaxSize(0.3f)
+                    .background(color = Color(0xFF001E2C))
+            ) {
+                Image(
+                    modifier = Modifier
+                        .align(Center)
+                        .matchParentSize()
+                        .fillMaxSize(0.8f),
+                    painter = painterResource(R.drawable.dota_plus_icon),
+                    contentDescription = contentDescription
+                )
+            }
     }
 }
 
 @Preview
 @Composable
-fun PreviewAvatar() {
+private fun PreviewAvatar() {
     Avatar(
-        modifier = Modifier.size(200.dp),
+        modifier = Modifier.size(120.dp),
         avatarImage = null,
         hasDotaPlus = true,
         contentDescription = "",
-        placeHolderDrawableRes = R.drawable.dota2_logo_icon
+        placeHolderDrawableRes = R.drawable.dota2_icon_placeholder
     )
 }

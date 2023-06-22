@@ -48,7 +48,7 @@ fun MainScreen(
 @ExperimentalLayoutApi
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun MainScreenPreview() {
+private fun MainScreenPreview() {
     MainScreen(
         modifier = Modifier.fillMaxSize(),
         listOfPlayers = ListOfPlayers,

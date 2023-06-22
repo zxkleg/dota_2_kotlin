@@ -57,7 +57,7 @@ fun SmallPlayerCard(
             Avatar(
                 modifier = Modifier.size(60.dp),
                 avatarImage = dataPlayer.avatar,
-                hasDotaPlus = dataPlayer.hasDotaPlus,
+                hasDotaPlus = false,
                 contentDescription = "",
                 placeHolderDrawableRes = placeHolderDrawableRes
             )
@@ -85,7 +85,7 @@ fun SmallPlayerCard(
 @Composable
 fun PreviewSmallPlayerCard() {
     SmallPlayerCard(
-        DataPlayer(id = "133722810", nickname = "Yaroslav", avatar = null, hasDotaPlus = true),
+        dataPlayer = DataPlayer(id = "133722810", nickname = "Yaroslav", avatar = null),
         placeHolderDrawableRes = R.drawable.dota2_logo_icon
     )
 }
