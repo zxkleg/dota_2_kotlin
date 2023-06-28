@@ -106,7 +106,7 @@ fun MainScreenContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .pullRefresh(pullRefreshState)
-                    .background(MaterialTheme.colorScheme.onSurface)
+                    .background(MaterialTheme.colorScheme.surface)
             ) {
                 if (playersList.isNotEmpty()) {
                     ListOfPlayers(
