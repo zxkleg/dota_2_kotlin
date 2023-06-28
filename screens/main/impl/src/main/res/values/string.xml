@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_for_players">Search for players</string>
+    <string name="no_players_found">No players found</string>
+</resources>
