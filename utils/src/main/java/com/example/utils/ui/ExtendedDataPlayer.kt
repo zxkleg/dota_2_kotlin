@@ -1,4 +1,4 @@
-package com.example.screens.player.api
+package com.example.utils.ui
 
 import android.graphics.Bitmap
 
@@ -11,3 +11,4 @@ data class ExtendedDataPlayer(
     val profileLink: String,
     val steamProfileLink: String
 )
+

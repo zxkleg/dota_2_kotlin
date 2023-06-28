@@ -11,13 +11,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,7 +31,7 @@ fun AppBar() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(Color(0xFF00668A))
+            .background(color = MaterialTheme.colorScheme.primary)
     ) {
         Box(
             modifier = Modifier
@@ -38,21 +39,23 @@ fun AppBar() {
                 .clip(shape = CircleShape)
                 .align(Alignment.CenterVertically)
                 .clickable(onClick = {})
+                .background(color = MaterialTheme.colorScheme.primary)
         ) {
             Image(
                 painter = painterResource(R.drawable.arrow_back),
-                colorFilter = tint(Color.White),
+                colorFilter = tint(color = MaterialTheme.colorScheme.onPrimary),
                 contentDescription = "Back Button",
                 modifier = Modifier
                     .wrapContentSize()
                     .padding(19.dp, 22.dp)
+                    .background(color = MaterialTheme.colorScheme.primary)
 
             )
         }
         Text(
-            text = "Player info",
+            text = stringResource(R.string.player_info),
             fontSize = 25.sp,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier.padding(2.dp)
         )
     }
@@ -60,6 +63,6 @@ fun AppBar() {
 
 @Preview
 @Composable
-fun AppBarPreview() {
+private fun AppBarPreview() {
     AppBar()
 }

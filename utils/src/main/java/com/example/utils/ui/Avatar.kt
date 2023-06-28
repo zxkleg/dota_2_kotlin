@@ -1,4 +1,4 @@
-package com.example.utils
+package com.example.utils.ui
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.utils.R
 
 
 @Composable

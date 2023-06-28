@@ -1,57 +1,90 @@
 package com.example.screens.main.impl
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.impl.R
-import com.example.screens.main.api.data.DataPlayer
-import com.example.screens.main.impl.components.AppBar
-import com.example.screens.main.impl.components.ListOfPlayers
 import com.example.screens.main.impl.components.MainScreenContent
+import com.example.utils.mvi.collectInLaunchedEffect
+import com.example.utils.mvi.use
+import kotlinx.coroutines.launch
 
-@ExperimentalLayoutApi
 @Composable
+@ExperimentalLayoutApi
+@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
+@ExperimentalFoundationApi
 fun MainScreen(
-    modifier: Modifier = Modifier, listOfPlayers: List<DataPlayer>, placeHolderDrawableRes: Int
+    modifier: Modifier = Modifier,
+    viewModel: MainScreenViewModel,
+    @DrawableRes
+    placeHolderDrawableRes: Int = R.drawable.dota2_logo_icon,
 ) {
+    val (state, event, effect) = use(viewModel)
+
+    val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val lazyColumnState = rememberLazyListState()
-    Scaffold(modifier = modifier, scaffoldState = scaffoldState,
-        topBar = {
-            AppBar()
+    val firstVisibleItemIndex by remember {
+        derivedStateOf { lazyColumnState.firstVisibleItemIndex }
+    }
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = state.isLoading,
+        onRefresh = {
+            event(MainScreenContract.Event.RefreshList)
         }
-        //floatingActionButton = {
-        //    FloatingActionButton()
-        //}
-    ) { paddingValues ->
-        Surface(
-            modifier = Modifier.consumeWindowInsets(paddingValues)
-        ) {
-            MainScreenContent(
-                modifier = modifier,
-                lazyColumnState = lazyColumnState,
-                listOfPlayers = listOfPlayers,
-                placeHolderDrawableRes = placeHolderDrawableRes
-            )
+    )
 
+    effect.collectInLaunchedEffect { incomingEffect ->
+        when (incomingEffect) {
+            is MainScreenContract.Effect.NavigateToPlayerScreen -> {
+                // TODO: Open Player info screen
+            }
+
+            is MainScreenContract.Effect.ShowPlayerCardDialog -> {
+                // TODO: Open Player card dialog
+            }
+
+            MainScreenContract.Effect.ScrollListToTheTop ->
+                coroutineScope.launch {
+                    lazyColumnState.animateScrollToItem(0)
+                }
         }
     }
-}
 
-@ExperimentalLayoutApi
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-private fun MainScreenPreview() {
-    MainScreen(
-        modifier = Modifier.fillMaxSize(),
-        listOfPlayers = ListOfPlayers,
-        placeHolderDrawableRes = R.drawable.dota2_logo_icon
+    LaunchedEffect(firstVisibleItemIndex) {
+        if (firstVisibleItemIndex >= 3)
+            event(MainScreenContract.Event.ListWasOverScrolled)
+        else
+            event(MainScreenContract.Event.ListIsOnTop)
+    }
+
+    MainScreenContent(
+        modifier = modifier,
+        scaffoldState = scaffoldState,
+        searchFieldValue = state.searchPattern,
+        pullRefreshState = pullRefreshState,
+        playersList = state.players,
+        lazyColumnState = lazyColumnState,
+        placeHolderDrawableRes = placeHolderDrawableRes,
+        isRefreshing = state.isLoading,
+        isFabVisible = state.isFabVisible,
+        onFabIsClicked = { event(MainScreenContract.Event.FabWasClicked) },
+        onSearchTextIsChanged = { event(MainScreenContract.Event.SearchPatternInput(it)) },
+        onCardIsClicked = { event(MainScreenContract.Event.PlayerCardWasClicked(it)) },
+        onCardLongClick = { event(MainScreenContract.Event.PlayerCardWasLongClicked(it)) }
     )
 }
+

@@ -18,10 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.screens.player.api.ExtendedDataPlayer
 import com.example.screens.player.impl.components.AppBar
-import com.example.utils.PlayerCard
 import com.example.utils.R
+import com.example.utils.ui.ExtendedDataPlayer
+import com.example.utils.ui.PlayerCard
 
 @ExperimentalLayoutApi
 @Composable
